@@ -9,19 +9,17 @@ import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.net.ConnectException;
-
 @Configuration
 public class RabbitMQConfig{
 
     @Bean
     public Queue getQueue(){
-        return new Queue(APIConstants.ORDERS_FOR_BILLING);
+        return new Queue(APIConstants.QUEUE_NAME);
     }
 
     @Bean
     public TopicExchange getExchange(){
-        return new TopicExchange(APIConstants.ORDER_EXCHANGE);
+        return new TopicExchange(APIConstants.EXCHANGE_NAME);
     }
 
     @Bean

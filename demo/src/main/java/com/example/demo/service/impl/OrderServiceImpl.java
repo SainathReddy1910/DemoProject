@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.UUID;
 
 import static com.example.demo.constants.APIConstants.ORDERS_ROUTING_KEY;
-import static com.example.demo.constants.APIConstants.ORDER_EXCHANGE;
+import static com.example.demo.constants.APIConstants.EXCHANGE_NAME;
 
 @Component
 public class OrderServiceImpl implements OrderService {
@@ -39,7 +39,7 @@ public class OrderServiceImpl implements OrderService {
         log.info("Object created {} ", orderCreated);
         orderRepository.save(orderCreated);
         log.info("Publishing the order to generate the bill.");
-        rabbitTemplate.convertAndSend(ORDER_EXCHANGE,ORDERS_ROUTING_KEY,orderCreated);
+        rabbitTemplate.convertAndSend(EXCHANGE_NAME,ORDERS_ROUTING_KEY,orderCreated);
         log.info("Message sent to bill generator successfully for {}: ", orderCreated);
         return orderCreated;
     }
